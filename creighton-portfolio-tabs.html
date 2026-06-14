@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creighton Krippel — Professional Selling, Baylor University</title>
+<style>
+  :root {
+    --cream: #F7F4ED;
+    --ink: #1B2A22;
+    --green: #154734;
+    --gold: #C9A24B;
+    --line: #DCD5C5;
+    --muted: #6B6557;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Georgia', 'Iowan Old Style', serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .mono {
+    font-family: 'Courier New', ui-monospace, monospace;
+    letter-spacing: 0.04em;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: var(--green);
+    color: var(--cream);
+    padding: 4rem 6vw 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::after {
+    content: "";
+    position: absolute;
+    top: -40%;
+    right: -10%;
+    width: 60vw;
+    height: 200%;
+    background: radial-gradient(circle, rgba(201,162,75,0.15), transparent 65%);
+    pointer-events: none;
+  }
+
+  .eyebrow {
+    font-family: 'Courier New', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.25rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.4rem, 6.5vw, 4.6rem);
+    font-weight: 400;
+    line-height: 1.05;
+    max-width: 14ch;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .pillars {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    font-family: 'Courier New', monospace;
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
+  }
+
+  .pillars span {
+    border: 1px solid rgba(247,244,237,0.35);
+    padding: 0.5rem 1.1rem;
+    border-radius: 999px;
+  }
+
+  .hero-sub {
+    margin-top: 2rem;
+    max-width: 38ch;
+    font-size: 1.05rem;
+    color: rgba(247,244,237,0.85);
+  }
+
+  /* ===== STAT TICKER ===== */
+  .ticker-wrap {
+    background: var(--ink);
+    overflow: hidden;
+    border-top: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
+  }
+
+  .ticker {
+    display: flex;
+    white-space: nowrap;
+    animation: scroll 38s linear infinite;
+    padding: 0.85rem 0;
+  }
+
+  .ticker:hover { animation-play-state: paused; }
+
+  .ticker span {
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    color: var(--cream);
+    margin-right: 3.5rem;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .ticker span::before {
+    content: "■";
+    color: var(--gold);
+    font-size: 0.6rem;
+    margin-right: 0.6rem;
+  }
+
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ticker { animation: none; }
+  }
+
+  /* ===== TAB NAV ===== */
+  .tab-nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: var(--cream);
+    border-bottom: 2px solid var(--ink);
+    display: flex;
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .tab-nav::-webkit-scrollbar { display: none; }
+
+  .tab-btn {
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: none;
+    border: none;
+    color: var(--muted);
+    padding: 1.1rem 1.6rem;
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 3px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .tab-btn:hover { color: var(--ink); }
+
+  .tab-btn.active {
+    color: var(--green);
+    border-bottom-color: var(--gold);
+  }
+
+  .tab-btn .num {
+    color: var(--gold);
+    margin-right: 0.5rem;
+  }
+
+  /* ===== PANELS ===== */
+  .panel {
+    display: none;
+    padding: 3.5rem 6vw;
+    max-width: 920px;
+    margin: 0 auto;
+    animation: fadeIn 0.35s ease;
+  }
+
+  .panel.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 0.75rem;
+  }
+
+  .section-head .tag {
+    font-family: 'Courier New', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    color: var(--green);
+    text-transform: uppercase;
+  }
+
+  .section-head h2 {
+    font-size: clamp(1.7rem, 4vw, 2.4rem);
+    font-weight: 400;
+  }
+
+  /* ===== ABOUT ===== */
+  .about-layout {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  .about p {
+    font-size: 1.08rem;
+    margin-bottom: 1.2rem;
+    max-width: 65ch;
+  }
+
+  .about .accent {
+    color: var(--green);
+    font-style: italic;
+  }
+
+  /* ===== IMAGE PLACEHOLDERS ===== */
+  .img-slot {
+    background: #fff;
+    border: 2px dashed var(--line);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--muted);
+    padding: 1.5rem;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+  }
+
+  .img-slot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .img-slot .icon {
+    font-size: 2rem;
+    margin-bottom: 0.6rem;
+    opacity: 0.5;
+  }
+
+  .img-slot .label {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .img-slot.wide { aspect-ratio: 16 / 9; }
+  .img-slot.square { aspect-ratio: 1 / 1; }
+
+  /* ===== EXPERIENCE ===== */
+  .role {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+    padding: 1.8rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .role:last-child { border-bottom: none; }
+
+  .role-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .role-title { font-size: 1.25rem; }
+
+  .role-org {
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  .role ul {
+    list-style: none;
+    margin-top: 0.5rem;
+  }
+
+  .role li {
+    position: relative;
+    padding-left: 1.3rem;
+    margin-bottom: 0.45rem;
+    font-size: 0.98rem;
+  }
+
+  .role li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+  }
+
+  .badge {
+    display: inline-block;
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    color: var(--green);
+    border: 1px solid var(--green);
+    border-radius: 999px;
+    padding: 0.2rem 0.7rem;
+    margin-top: 0.6rem;
+    margin-right: 0.5rem;
+  }
+
+  /* ===== EDUCATION ===== */
+  .edu-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--green);
+    padding: 1.8rem 2rem;
+  }
+
+  .edu-card h3 { font-size: 1.3rem; font-weight: 400; }
+  .edu-card .meta {
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin: 0.4rem 0 1rem;
+  }
+  .edu-card .gpa {
+    font-family: 'Courier New', monospace;
+    font-size: 2.2rem;
+    color: var(--green);
+    line-height: 1;
+  }
+  .edu-card .gpa-label {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .edu-grid {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+  .edu-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .edu-tags span {
+    font-family: 'Courier New', monospace;
+    font-size: 0.78rem;
+    background: var(--cream);
+    border: 1px solid var(--line);
+    padding: 0.35rem 0.7rem;
+    border-radius: 4px;
+  }
+
+  /* ===== BEYOND ===== */
+  .beyond-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .beyond-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    padding: 1.6rem;
+  }
+
+  .beyond-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.6rem;
+    color: var(--green);
+  }
+
+  .beyond-card p {
+    font-size: 0.95rem;
+  }
+
+  .beyond-card.placeholder {
+    border-style: dashed;
+    color: var(--muted);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .beyond-card.placeholder h3 { color: var(--muted); }
+
+  /* ===== GALLERY ===== */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+  }
+
+  .gallery-grid .img-slot:nth-child(3n+1) { grid-row: span 2; aspect-ratio: 4 / 7; }
+
+  .gallery-caption {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-top: 0.5rem;
+    text-align: center;
+  }
+
+  @media (max-width: 700px) {
+    .about-layout { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    .gallery-grid .img-slot:nth-child(3n+1) { grid-row: span 1; aspect-ratio: 4/5; }
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 3rem 6vw;
+    text-align: center;
+  }
+
+  footer .mono {
+    font-size: 0.8rem;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  footer p {
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: rgba(247,244,237,0.8);
+  }
+
+  @media (max-width: 640px) {
+    .hero { padding: 3rem 6vw 2rem; }
+    .panel { padding: 2.5rem 6vw; }
+    .tab-btn { padding: 1rem 1.2rem; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="eyebrow">Creighton A. Krippel · Baylor University · Class of 2029</div>
+    <h1>Building relationships<br>that <em>build futures.</em></h1>
+    <div class="pillars">
+      <span>Persistent</span>
+      <span>Relational</span>
+      <span>Purpose-Driven</span>
+    </div>
+    <p class="hero-sub">
+      Professional Selling &amp; Finance student. Currently studying abroad in Sydney, Australia —
+      learning to connect across new rooms and new cultures, one conversation at a time.
+    </p>
+  </div>
+
+  <!-- STAT TICKER -->
+  <div class="ticker-wrap" aria-label="Career highlights">
+    <div class="ticker">
+      <span>$9,000+ raised for Baylor scholarships in first 6 weeks</span>
+      <span>2026 Stand Out New Ambassador</span>
+      <span>137 Visa cards sold — #1 part-time cashier, 2023</span>
+      <span>100% Test Shop score, undercover evaluator</span>
+      <span>3.8 GPA — Professional Selling &amp; Finance</span>
+      <span>3+ years customer-facing experience</span>
+      <span>$9,000+ raised for Baylor scholarships in first 6 weeks</span>
+      <span>2026 Stand Out New Ambassador</span>
+      <span>137 Visa cards sold — #1 part-time cashier, 2023</span>
+      <span>100% Test Shop score, undercover evaluator</span>
+      <span>3.8 GPA — Professional Selling &amp; Finance</span>
+      <span>3+ years customer-facing experience</span>
+    </div>
+  </div>
+
+  <!-- TAB NAV -->
+  <nav class="tab-nav" role="tablist" aria-label="Portfolio sections">
+    <button class="tab-btn active" data-tab="about" role="tab" aria-selected="true"><span class="num">01</span>About</button>
+    <button class="tab-btn" data-tab="experience" role="tab" aria-selected="false"><span class="num">02</span>Experience</button>
+    <button class="tab-btn" data-tab="education" role="tab" aria-selected="false"><span class="num">03</span>Education</button>
+    <button class="tab-btn" data-tab="beyond" role="tab" aria-selected="false"><span class="num">04</span>Beyond</button>
+    <button class="tab-btn" data-tab="gallery" role="tab" aria-selected="false"><span class="num">05</span>Gallery</button>
+  </nav>
+
+  <!-- ABOUT PANEL -->
+  <section class="panel active" id="about" role="tabpanel">
+    <div class="section-head">
+      <span class="tag">01</span>
+      <h2>About</h2>
+    </div>
+    <div class="about-layout">
+      <div class="about">
+        <p>
+          Motivated by a love of serving others and hearing people's stories, I've naturally found my passion in sales.
+          Built on three-plus years of customer service experience, I currently work at the
+          <span class="accent">Baylor University Engagement Center</span>, where I call Baylor alumni to reconnect
+          them with the university and help fund scholarships for current students.
+        </p>
+        <p>
+          I'm a second-year BBA student majoring in <span class="accent">Professional Selling and Finance</span>,
+          and part of Baylor's competitive ProSales program — a hands-on environment focused on building trust,
+          asking the right questions, and creating real value in every conversation.
+        </p>
+        <p>
+          This semester, that growth continues a world away. I'm studying abroad in Sydney, Australia, working
+          through a managerial accounting course while learning to navigate a new city, a new culture, and new
+          people — the same muscles I use every day on the phones, just stretched further. Adaptability,
+          curiosity, and genuine connection translate everywhere.
+        </p>
+        <p>
+          At my core, I'm driven by faith and a desire to make a lasting impact — whether that's helping an alum
+          reconnect with their alma mater, training a coworker, or simply listening to someone's story.
+        </p>
+      </div>
+      <div>
+        <div class="img-slot">
+          <div class="icon">＋</div>
+          <div class="label">Headshot / Profile Photo</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE PANEL -->
+  <section class="panel" id="experience" role="tabpanel">
+    <div class="section-head">
+      <span class="tag">02</span>
+      <h2>Experience</h2>
+    </div>
+
+    <div class="role">
+      <div class="role-top">
+        <span class="role-title">Student Advancement Ambassador</span>
+        <span class="role-org">Baylor University Engagement Center · Mar 2026 – Present</span>
+      </div>
+      <ul>
+        <li>Represent Baylor University by connecting with alumni, parents, and friends through personalized outreach</li>
+        <li>Share opportunities for the Baylor family to engage, give, and participate in campus events</li>
+        <li>Process donor contributions in direct support of Baylor's scholarship funds</li>
+        <li>Raised over $9,000 for scholarships and funds in my first six weeks</li>
+      </ul>
+      <span class="badge">2026 Stand Out New Ambassador</span>
+    </div>
+
+    <div class="role">
+      <div class="role-top">
+        <span class="role-title">Customer Service &amp; Cashier Trainer</span>
+        <span class="role-org">SCHEELS All Sports · Feb 2024 – Feb 2026</span>
+      </div>
+      <ul>
+        <li>Delivered hands-on training for new hires, providing constructive feedback to trainees and progress reports to managers</li>
+        <li>Mentored coworkers who struggled with Visa card sales, drawing on firsthand experience as a top performer</li>
+        <li>Operated OMS and POS systems while managing transactions, refunds, and online orders</li>
+      </ul>
+    </div>
+
+    <div class="role">
+      <div class="role-top">
+        <span class="role-title">Cashier</span>
+        <span class="role-org">SCHEELS All Sports · Dec 2022 – Feb 2026</span>
+      </div>
+      <ul>
+        <li>Delivered an exceptional customer experience through positive attitude, personal conversations, and going the extra mile</li>
+        <li>Named 2023 Top Part-Time Cashier in Visa Sales with 137 cards sold — #1 among part-time cashiers</li>
+        <li>Earned a 100% Test Shop score from an undercover evaluator</li>
+      </ul>
+    </div>
+
+    <div class="img-slot wide" style="margin-top: 2rem;">
+      <div class="icon">＋</div>
+      <div class="label">Photo — On the Phones at BUEC / Scheels</div>
+    </div>
+  </section>
+
+  <!-- EDUCATION PANEL -->
+  <section class="panel" id="education" role="tabpanel">
+    <div class="section-head">
+      <span class="tag">03</span>
+      <h2>Education</h2>
+    </div>
+    <div class="edu-card">
+      <h3>Baylor University — Waco, TX</h3>
+      <div class="meta">Bachelor of Business Administration · Professional Selling &amp; Finance · Expected May 2029</div>
+      <div class="edu-grid">
+        <div>
+          <div class="gpa">3.8 / 4.0</div>
+          <div class="gpa-label">Cumulative GPA</div>
+        </div>
+        <div class="edu-tags">
+          <span>ProSales Program</span>
+          <span>Christian Business Leaders</span>
+          <span>Vertical Ministries</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 2rem; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;">
+      <div class="img-slot square">
+        <div class="icon">＋</div>
+        <div class="label">Photo — Baylor Campus</div>
+      </div>
+      <div class="img-slot square">
+        <div class="icon">＋</div>
+        <div class="label">Photo — ProSales / Class</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEYOND PANEL -->
+  <section class="panel" id="beyond" role="tabpanel">
+    <div class="section-head">
+      <span class="tag">04</span>
+      <h2>Beyond the Resume</h2>
+    </div>
+    <div class="beyond-grid">
+      <div class="beyond-card">
+        <h3>Faith &amp; Service — Edinburg, TX</h3>
+        <p>
+          On a mission trip with Antioch Waco, our team had the chance to pray over a UTRGV student who
+          had just lost his grandfather. It was a powerful moment — for him, and for all of us — and one
+          that's shaped how I think about showing up for people in their hardest moments.
+        </p>
+      </div>
+      <div class="beyond-card placeholder">
+        <h3>BBVA Sales Competition</h3>
+        <p>Reserved for the Baylor Business Value Analysis pitch — details coming soon.</p>
+      </div>
+      <div class="beyond-card">
+        <h3>Outside of Work</h3>
+        <p>
+          Weightlifting, golf, and traveling fill my free time, along with following soccer and basketball.
+          I'm also working my way through the MCU and logging films on Letterboxd.
+        </p>
+      </div>
+    </div>
+
+    <div class="img-slot wide" style="margin-top: 2rem;">
+      <div class="icon">＋</div>
+      <div class="label">Photo — Mission Trip / Antioch Waco</div>
+    </div>
+  </section>
+
+  <!-- GALLERY PANEL -->
+  <section class="panel" id="gallery" role="tabpanel">
+    <div class="section-head">
+      <span class="tag">05</span>
+      <h2>Gallery</h2>
+    </div>
+    <div class="gallery-grid">
+      <div>
+        <div class="img-slot">
+          <div class="icon">＋</div>
+          <div class="label">Photo</div>
+        </div>
+        <div class="gallery-caption">Caption here</div>
+      </div>
+      <div>
+        <div class="img-slot square">
+          <div class="icon">＋</div>
+          <div class="label">Photo</div>
+        </div>
+        <div class="gallery-caption">Caption here</div>
+      </div>
+      <div>
+        <div class="img-slot square">
+          <div class="icon">＋</div>
+          <div class="label">Photo</div>
+        </div>
+        <div class="gallery-caption">Caption here</div>
+      </div>
+      <div>
+        <div class="img-slot square">
+          <div class="icon">＋</div>
+          <div class="label">Photo</div>
+        </div>
+        <div class="gallery-caption">Caption here</div>
+      </div>
+      <div>
+        <div class="img-slot square">
+          <div class="icon">＋</div>
+          <div class="label">Photo</div>
+        </div>
+        <div class="gallery-caption">Caption here</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="mono">Let's connect</div>
+    <p>Creighton A. Krippel · Creighton_Krippel1@baylor.edu · (217) 971-5111</p>
+  </footer>
+
+  <script>
+    const tabs = document.querySelectorAll('.tab-btn');
+    const panels = document.querySelectorAll('.panel');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+        panels.forEach(p => p.classList.remove('active'));
+
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+        document.getElementById(tab.dataset.tab).classList.add('active');
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+  </script>
+
+</body>
+</html>
